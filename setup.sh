@@ -13,7 +13,7 @@ sudo apt-get install -y apt-transport-https ca-certificates curl software-proper
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo apt-key fingerprint 0EBFCD88
 sudo apt-add-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-sudo apt-get update && sudo apt-get install docker-ce
+sudo apt-get update && sudo apt-get install -y docker-ce
 
 # install kubernetes
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
@@ -21,7 +21,8 @@ echo 'deb http://apt.kubernetes.io/ kubernetes-xenial main' | sudo tee /etc/apt/
 sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl
 
 # add user to docker group
-sudo usermod -a -G docker $USER
+#sudo usermod -a -G docker $USER
+sudo gpasswd -a $USER docker
 
 # install docker-machine
 curl -kL https://github.com/docker/machine/releases/download/v0.14.0/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine && sudo install /tmp/docker-machine /usr/local/bin/docker-machine
