@@ -23,7 +23,8 @@ sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl
 # add user to docker group
 #sudo usermod -a -G docker $USER
 sudo gpasswd -a $USER docker
-newgrp -
+#newgrp -
+exec sudo su -l $USER
 
 # install docker-machine
 curl -kL https://github.com/docker/machine/releases/download/v0.14.0/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine && sudo install /tmp/docker-machine /usr/local/bin/docker-machine
