@@ -39,7 +39,7 @@ wget --no-check-certificate https://releases.rancher.com/os/latest/rancheros.iso
 
 # run rancher with docker group
 exec sg docker "docker run -d --restart=unless-stopped -p 8080:8080 rancher/server:stable"
-newgrp -
+newgrp - docker
 
 
 
