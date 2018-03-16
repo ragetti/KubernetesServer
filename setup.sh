@@ -24,7 +24,7 @@ sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl
 #sudo usermod -a -G docker $USER
 sudo gpasswd -a $USER docker
 #newgrp -
-exec sudo su -l $USER
+#exec sudo su -l $USER
 
 # install docker-machine
 curl -kL https://github.com/docker/machine/releases/download/v0.14.0/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine && sudo install /tmp/docker-machine /usr/local/bin/docker-machine
@@ -36,7 +36,10 @@ sudo apt-get install -y virtualbox
 mkdir -p ~/.docker/machine/cache/
 wget --no-check-certificate https://github.com/boot2docker/boot2docker/releases/download/v17.12.1-ce/boot2docker.iso && mv boot2docker.iso ~/.docker/machine/cache/
 wget --no-check-certificate https://releases.rancher.com/os/latest/rancheros.iso && mv rancheros.iso ~/.docker/machine/cache/
-docker run -d --restart=unless-stopped -p 8080:8080 rancher/server:stable
+
+# run rancher with docker group
+exec sg docker "docker run -d --restart=unless-stopped -p 8080:8080 rancher/server:stable"
+newgrp -
 
 
 
