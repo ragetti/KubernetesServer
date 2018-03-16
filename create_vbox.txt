@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# docker-machine create -d virtualbox --virtualbox-memory "3072" --virtualbox-boot2docker-url https://releases.rancher.com/os/latest/rancheros.iso box-1
+# docker-machine create -d virtualbox --virtualbox-memory "2048" box-1
