@@ -38,7 +38,7 @@ wget --no-check-certificate https://github.com/boot2docker/boot2docker/releases/
 wget --no-check-certificate https://releases.rancher.com/os/latest/rancheros.iso && mv rancheros.iso ~/.docker/machine/cache/
 
 # run rancher with docker group
-exec sg docker "docker run -d --restart=unless-stopped -p 8080:8080 rancher/server:stable"
+#exec sg docker "docker run -d --restart=unless-stopped -p 8080:8080 rancher/server:stable"
 newgrp - docker
 
 
