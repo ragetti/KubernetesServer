@@ -24,6 +24,9 @@ sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl
 #sudo usermod -a -G docker $USER
 sudo gpasswd -a $USER docker
 
+# turn off swap, should be made permanent
+sudo swapoff -a
+
 # initialize cluster
 sudo kubeadm init --kubernetes-version v1.10.0
 
