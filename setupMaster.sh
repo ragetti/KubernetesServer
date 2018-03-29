@@ -27,6 +27,9 @@ sudo gpasswd -a $USER docker
 # turn off swap, should be made permanent
 sudo swapoff -a
 
+# copy crictl
+sudo cp crictl /usr/local/bin/
+
 # initialize cluster
 sudo kubeadm init --kubernetes-version v1.10.0
 
