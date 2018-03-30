@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# add dns for PV and google
+echo "nameserver 10.25.0.122" > /etc/resolvconf/resolv.conf.d/pv
+echo "nameserver 8.8.8.8" >> /etc/resolvconf/resolv.conf.d/pv
+
 # get newest packages
 sudo apt-get update
 sudo apt-get install -y perl
