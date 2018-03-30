@@ -9,6 +9,13 @@ echo "nameserver 10.25.0.122" | sudo tee -a /etc/resolvconf/resolv.conf.d/base
 echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolvconf/resolv.conf.d/base
 sudo resolvconf -u
 
+# add self signed certs for pv
+echo | openssl s_client -connect storage.googleapis.com:443 -showcerts > bundle.txt
+cat bundle.txt | awk '/BEGIN/ { i++; } /BEGIN/, /END/ { print > "pv" i ".crt" }'
+sudo cp pv*.crt /usr/local/share/ca-certificates/
+sudo update-ca-certificates
+
+
 # get newest packages
 sudo apt-get update
 sudo apt-get install -y perl

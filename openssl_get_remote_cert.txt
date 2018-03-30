@@ -3,3 +3,16 @@ sudo cp <crt> /usr/local/share/ca-certificates/
 sudo update-ca-certificates
 
 
+echo | openssl s_client -connect storage.googleapis.com:443 -showcerts > temp.txt
+
+echo | openssl s_client -connect storage.googleapis.com:443 2>&1 | sed --quiet '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > pvself.crt
+sudo cp pvself.crt /usr/local/share/ca-certificates/
+sudo update-ca-certificates
+
+echo | openssl s_client -connect storage.googleapis.com:443 -showcerts > bundle.txt
+cat bundle.txt | awk '/BEGIN/ { i++; } /BEGIN/, /END/ { print > "pv" i ".crt" }'
+sudo cp pv*.crt /usr/local/share/ca-certificates/
+sudo update-ca-certificates
+
+
+
