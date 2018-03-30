@@ -1,8 +1,13 @@
 #!/bin/bash
+# notes
+# sudo apt-get install git
+# git clone https://github.com/ragetti/KubernetesServer.git
+
 
 # add dns for PV and google
-echo "nameserver 10.25.0.122" > /etc/resolvconf/resolv.conf.d/pv
-echo "nameserver 8.8.8.8" >> /etc/resolvconf/resolv.conf.d/pv
+echo "nameserver 10.25.0.122" | sudo tee /etc/resolvconf/resolv.conf.d/pv
+echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolvconf/resolv.conf.d/pv
+sudo resolvconf -u
 
 # get newest packages
 sudo apt-get update
