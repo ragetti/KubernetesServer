@@ -1,6 +1,6 @@
 #!/bin/bash
 # notes
-# sudo apt-get install git
+# sudo apt-get install -y git
 # git clone https://github.com/ragetti/KubernetesServer.git
 
 
@@ -46,8 +46,11 @@ sudo swapoff -a
 # copy crictl
 sudo cp crictl /usr/local/bin/
 
+# pass bridged IPv4 traffic to iptables’ chains, requirement of CNI flannel
+sudo sysctl net.bridge.bridge-nf-call-iptables=1
+
 # initialize cluster
-sudo kubeadm init --kubernetes-version v1.10.0
+sudo kubeadm init --kubernetes-version v1.10.0 --pod-network-cidr=10.244.0.0/16
 
 # allows local user run
 mkdir -p $HOME/.kube
@@ -55,8 +58,9 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 # CNI
-kubectl create -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-#kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+#kubectl create -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+#kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.9.1/Documentation/kube-flannel.yml
 
 # make group active
 #newgrp - docker

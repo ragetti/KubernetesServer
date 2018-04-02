@@ -47,4 +47,5 @@ sudo swapoff -a
 sudo cp crictl /usr/local/bin/
 
 # make group active
-newgrp - docker
+#newgrp - docker
+echo "Logout and Login to have environment changes take effect"
