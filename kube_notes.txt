@@ -1,0 +1,20 @@
+
+# generate token to be used for join-command
+kubeadm token create --print-join-command
+
+
+kubeadm join --ignore-preflight-errors cri
+
+
+kubectl get pods --all-namespaces -o wide
+
+
+/etc/docker/daemon.json
+cat << EOF > /etc/docker/daemon.json { "exec-opts": ["native.cgroupdriver=cgroupfs"] } EOF
+
+ sudo systemctl enable docker && systemctl start docker
+
+systemctl status kubelet
+
+
+conntrack
