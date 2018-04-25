@@ -50,7 +50,8 @@ sudo cp crictl /usr/local/bin/
 sudo sysctl net.bridge.bridge-nf-call-iptables=1
 
 # initialize cluster
-sudo kubeadm init --kubernetes-version v1.10.0 --pod-network-cidr=10.244.0.0/16
+#sudo kubeadm init --kubernetes-version v1.10.0 --pod-network-cidr=10.244.0.0/16
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 
 # allows local user run
 mkdir -p $HOME/.kube
