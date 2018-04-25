@@ -25,3 +25,5 @@ conntrack
 kubectl taint nodes --all node-role.kubernetes.io/master-
 watch kubectl get pods --all-namespaces
 kubectl get nodes -o wide
+
+kubectl get pods -o wide --sort-by="{.spec.nodeName}"
