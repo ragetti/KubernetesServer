@@ -19,6 +19,8 @@ sudo update-ca-certificates
 # get newest packages
 sudo apt-get update
 sudo apt-get install -y perl
+
+# remove cdrom from sources, optional and live with error
 sudo perl -p -i -e "s/^deb cdrom/#deb cdrom/g" /etc/apt/sources.list
 
 # install opensshd
@@ -40,10 +42,10 @@ sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl conntrack
 #sudo usermod -a -G docker $USER
 sudo gpasswd -a $USER docker
 
-# turn off swap, should be made permanent
+# turn off swap, should be made permanent by editing /etc/fstab
 sudo swapoff -a
 
-# copy crictl
+# install crictl for CNI
 sudo cp crictl /usr/local/bin/
 
 # pass bridged IPv4 traffic to iptables’ chains, requirement of CNI flannel
