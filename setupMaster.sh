@@ -34,9 +34,14 @@ sudo apt-add-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 sudo apt-get update && sudo apt-get install -y docker-ce
 
 # install kubernetes
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-echo 'deb http://apt.kubernetes.io/ kubernetes-xenial main' | sudo tee /etc/apt/sources.list.d/kubernetes.list
-sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl conntrack
+sudo snap install conjure-up --classic
+# re-login may be required at that point if you just installed snap utility
+conjure-up kubernetes
+
+#old install
+#curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+#echo 'deb http://apt.kubernetes.io/ kubernetes-xenial main' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+#sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl conntrack
 
 # add user to docker group
 #sudo usermod -a -G docker $USER
